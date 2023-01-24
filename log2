@@ -1,0 +1,93 @@
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker pull busybox
+[sudo] пароль для vutkin:
+Using default tag: latest
+latest: Pulling from library/busybox
+Digest: sha256:7b3ccabffc97de872a30dfd234fd972a66d247c8cfc69b0550f276481852627c
+Status: Image is up to date for busybox:latest
+docker.io/library/busybox:latest
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker run -it --name pinger busybox ping -c 7 netology.ru
+PING netology.ru (104.22.40.171): 56 data bytes
+64 bytes from 104.22.40.171: seq=0 ttl=58 time=6.299 ms
+64 bytes from 104.22.40.171: seq=1 ttl=58 time=6.779 ms
+64 bytes from 104.22.40.171: seq=2 ttl=58 time=3.394 ms
+64 bytes from 104.22.40.171: seq=3 ttl=58 time=6.705 ms
+64 bytes from 104.22.40.171: seq=4 ttl=58 time=3.368 ms
+64 bytes from 104.22.40.171: seq=5 ttl=58 time=6.671 ms
+64 bytes from 104.22.40.171: seq=6 ttl=58 time=5.186 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 3.368/5.486/6.779 ms
+vutkin@vutkin:~/projects/ahj-http-backend$ docker ps -pa
+unknown shorthand flag: 'p' in -pa
+See 'docker ps --help'.
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+cabb01b06cd9   busybox   "ping -c 7 netology.…"   25 seconds ago   Exited (0) 17 seconds ago             pinger
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker logs pinger
+PING netology.ru (104.22.40.171): 56 data bytes
+64 bytes from 104.22.40.171: seq=0 ttl=58 time=6.299 ms
+64 bytes from 104.22.40.171: seq=1 ttl=58 time=6.779 ms
+64 bytes from 104.22.40.171: seq=2 ttl=58 time=3.394 ms
+64 bytes from 104.22.40.171: seq=3 ttl=58 time=6.705 ms
+64 bytes from 104.22.40.171: seq=4 ttl=58 time=3.368 ms
+64 bytes from 104.22.40.171: seq=5 ttl=58 time=6.671 ms
+64 bytes from 104.22.40.171: seq=6 ttl=58 time=5.186 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 3.368/5.486/6.779 ms
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker start pinger
+pinger
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                      PORTS     NAMES
+cabb01b06cd9   busybox   "ping -c 7 netology.…"   About a minute ago   Exited (0) 20 seconds ago             pinger
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker logs pinger
+PING netology.ru (104.22.40.171): 56 data bytes
+64 bytes from 104.22.40.171: seq=0 ttl=58 time=6.299 ms
+64 bytes from 104.22.40.171: seq=1 ttl=58 time=6.779 ms
+64 bytes from 104.22.40.171: seq=2 ttl=58 time=3.394 ms
+64 bytes from 104.22.40.171: seq=3 ttl=58 time=6.705 ms
+64 bytes from 104.22.40.171: seq=4 ttl=58 time=3.368 ms
+64 bytes from 104.22.40.171: seq=5 ttl=58 time=6.671 ms
+64 bytes from 104.22.40.171: seq=6 ttl=58 time=5.186 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 3.368/5.486/6.779 ms
+PING netology.ru (104.22.41.171): 56 data bytes
+64 bytes from 104.22.41.171: seq=0 ttl=58 time=6.343 ms
+64 bytes from 104.22.41.171: seq=1 ttl=58 time=6.676 ms
+64 bytes from 104.22.41.171: seq=2 ttl=58 time=6.742 ms
+64 bytes from 104.22.41.171: seq=3 ttl=58 time=5.853 ms
+64 bytes from 104.22.41.171: seq=4 ttl=58 time=6.716 ms
+64 bytes from 104.22.41.171: seq=5 ttl=58 time=6.821 ms
+64 bytes from 104.22.41.171: seq=6 ttl=58 time=6.750 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 5.853/6.557/6.821 ms
+vutkin@vutkin:~/projects/ahj-http-backend$ echo "14 запросов"
+14 запросов
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker rm pinger && sudo docker rmi busybox
+pinger
+Untagged: busybox:latest
+Untagged: busybox@sha256:7b3ccabffc97de872a30dfd234fd972a66d247c8cfc69b0550f276481852627c
+Deleted: sha256:66ba00ad3de8677a3fa4bc4ea0fc46ebca0f14db46ca365e7f60833068dd0148
+Deleted: sha256:b64792c17e4ad443d16b218afb3a8f5d03ca0f4ec49b11c1a7aebe17f6c3c1d2
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker images
+REPOSITORY                     TAG              IMAGE ID       CREATED        SIZE
+<none>                         <none>           55ac9c05c20d   11 days ago    574MB
+<none>                         <none>           5549f7a3c876   11 days ago    574MB
+<none>                         <none>           7dfab844c9ad   11 days ago    574MB
+<none>                         <none>           dee464d4f963   11 days ago    574MB
+application_hv-frontend-node   latest           e97e27567f6a   11 days ago    993MB
+<none>                         <none>           b781dc94779b   11 days ago    574MB
+<none>                         <none>           d266f852edd1   12 days ago    950MB
+app_hv-frontend-node           latest           1f034e35f0c3   13 days ago    993MB
+app_hv-payment-node            latest           4d96ab954af6   13 days ago    1.38GB
+node                           18.12.1-alpine   6d7b7852bcd3   6 weeks ago    169MB
+nginx                          1.20.2           0584b370e957   8 months ago   141MB
+node                           14.15.0-alpine   9db54a688554   2 years ago    117MB
+vutkin@vutkin:~/projects/ahj-http-backend$ sudo docker images | grep busy*
+vutkin@vutkin:~/projects/ahj-http-backend$ exit
